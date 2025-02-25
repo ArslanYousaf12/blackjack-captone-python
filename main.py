@@ -28,6 +28,19 @@ def random_card(input_card, card_list):
     input_card.append(random.choice(cards))
     return input_card
 
+def who_win(user_total, computer_total):
+     if user_total > 21:
+        print("You loose")
+     elif computer_total > 21:
+        print("You win")
+     elif user_total > computer_total:
+        print(f"You win")
+     elif user_total == computer_total:
+        print("Draw")
+    
+     else:
+        print("You loose")
+
 cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
 
 ##################### Hints #####################
@@ -40,16 +53,23 @@ user_card = random_card(user_card, cards)
 computer_card = random_card(computer_card, cards)
 print(f"Your cards are {user_card}")
 print(f"computer card is {computer_card}")
-# user_choice = input("You want another card 'y' or not 'n'")
-# if user_choice == 'n':
-#     computer_card.append(random.choice(cards))
-#     total_value = sum_card(computer_card)
-#     print(f"total value is {total_value}")
-#     if total_value < 17:
-#         computer_card.append(random.choice(cards))
-#         total_value = sum_card(computer_card)
-#     print(f"Your cards are {user_card}")
-#     print(f"computer card is {computer_card}")
+user_choice = input("You want another card 'y' or not 'n' ")
+if user_choice == 'n':
+    computer_card = random_card(computer_card, cards)
+    total_value_computer = sum_card(computer_card)
+    # print(f"total value is {total_value}")
+    if total_value_computer < 17:
+        computer_card = random_card(computer_card, cards)
+        total_value_computer = sum_card(computer_card)
+    total_value_user = sum_card(user_card)
+    print(f"Your cards are {user_card}")
+    print(f"your score is {total_value_user}")
+    print(f"computer card is {computer_card}")
+    print(f"computer score is {total_value_computer}")
+    who_win(user_total=total_value_user, computer_total= total_value_computer)
+else:
+    
+   
     
     
 #Hint 1: Go to this website and try out the Blackjack game: 
