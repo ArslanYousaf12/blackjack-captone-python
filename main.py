@@ -19,9 +19,7 @@
 import random
 def sum_card(card_list):
     sumNum = 0
-    for card in card_list:
-        print(card)
-        sumNum = sumNum + card
+    sumNum = sum(card_list)
     return sumNum
 
 def printingTotal(user_total_score, computer_total_score):
@@ -69,7 +67,7 @@ while not end_of_game:
     computer_card = []
     total_value_computer = 0
     total_value_user = 0
-
+    
     user_card = random_card(user_card, cards)
     user_card = random_card(user_card, cards)
 
@@ -79,6 +77,7 @@ while not end_of_game:
     if user_choice == 'n':
         computer_card = random_card(computer_card, cards)
         total_value_computer = sum_card(computer_card)
+        
         # print(f"total value is {total_value}")
         if total_value_computer < 17:
             computer_card = random_card(computer_card, cards)
@@ -92,6 +91,7 @@ while not end_of_game:
     else:
         user_card = random_card(user_card, cards)
         total_value_user = sum_card(user_card)
+        total_value_computer = sum_card(computer_card)
         if total_value_user < 19:
             user_want_card = input(f"Do you want to another card 'n' or 'y' your score is {total_value_user}")
             if user_want_card == 'n':
