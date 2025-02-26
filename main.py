@@ -24,11 +24,27 @@ def sum_card(card_list):
         sumNum = sumNum + card
     return sumNum
 
+def printingTotal(user_total_score, computer_total_score):
+    
+    print(f"your score is {user_total_score}")
+    print(f"computer score is {computer_total_score}")
+
+def printCards(user_card, computer_card):
+    print(f"Your cards are {user_card}")
+    print(f"computer card is {computer_card}")
+
+def card_and_value_print(user_card, computer_card, user_total_score, computer_total_score):
+    printCards(user_card, computer_card)
+    printingTotal(user_total_score, computer_total_score)
+
+
+
 def random_card(input_card, card_list):
     input_card.append(random.choice(cards))
     return input_card
 
 def who_win(user_total, computer_total):
+     '''Take the user and computer score and then print who wins'''
      if user_total > 21:
         print("You loose")
      elif computer_total > 21:
@@ -42,32 +58,65 @@ def who_win(user_total, computer_total):
         print("You loose")
 
 cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+end_of_game = False
+want_play = input("Do you want to play blackjack 'y' 'n' ")
+if want_play == "n":
+    end_of_game = True
+while not end_of_game:
 
-##################### Hints #####################
-user_card = []
-computer_card = []
+    ##################### Hints #####################
+    user_card = []
+    computer_card = []
+    total_value_computer = 0
+    total_value_user = 0
 
-user_card = random_card(user_card, cards)
-user_card = random_card(user_card, cards)
+    user_card = random_card(user_card, cards)
+    user_card = random_card(user_card, cards)
 
-computer_card = random_card(computer_card, cards)
-print(f"Your cards are {user_card}")
-print(f"computer card is {computer_card}")
-user_choice = input("You want another card 'y' or not 'n' ")
-if user_choice == 'n':
     computer_card = random_card(computer_card, cards)
-    total_value_computer = sum_card(computer_card)
-    # print(f"total value is {total_value}")
-    if total_value_computer < 17:
+    printCards(user_card,computer_card)
+    user_choice = input("You want another card 'y' or not 'n' ")
+    if user_choice == 'n':
         computer_card = random_card(computer_card, cards)
         total_value_computer = sum_card(computer_card)
-    total_value_user = sum_card(user_card)
-    print(f"Your cards are {user_card}")
-    print(f"your score is {total_value_user}")
-    print(f"computer card is {computer_card}")
-    print(f"computer score is {total_value_computer}")
-    who_win(user_total=total_value_user, computer_total= total_value_computer)
-else:
+        # print(f"total value is {total_value}")
+        if total_value_computer < 17:
+            computer_card = random_card(computer_card, cards)
+            total_value_computer = sum_card(computer_card)
+        total_value_user = sum_card(user_card)
+        card_and_value_print(user_card, computer_card, total_value_user, total_value_computer)
+        who_win(user_total=total_value_user, computer_total= total_value_computer)
+        want_play = input("Do you want to play blackjack 'y' 'n' ")
+        if want_play == "n":
+            end_of_game = True
+    else:
+        user_card = random_card(user_card, cards)
+        total_value_user = sum_card(user_card)
+        if total_value_user < 19:
+            user_want_card = input(f"Do you want to another card 'n' or 'y' your score is {total_value_user}")
+            if user_want_card == 'n':
+                card_and_value_print(user_card, computer_card, total_value_user, total_value_computer)
+                who_win(user_total= total_value_user, computer_total= total_value_computer)
+                want_play = input("Do you want to play blackjack 'y' 'n' ")
+                if want_play == "n":
+                    end_of_game = True
+            else:
+                user_card = random_card(user_card, cards)
+                total_value_user = sum_card(user_card)
+                card_and_value_print(user_card, computer_card, total_value_user, total_value_computer)
+                who_win(user_total= total_value_user, computer_total= total_value_computer)
+                want_play = input("Do you want to play blackjack 'y' 'n' ")
+                if want_play == "n":
+                    end_of_game = True
+
+        else:
+            card_and_value_print(user_card, computer_card, total_value_user, total_value_computer)
+            who_win(user_total= total_value_user, computer_total= total_value_computer)
+            want_play = input("Do you want to play blackjack 'y' 'n' ")
+            if want_play == "n":
+                end_of_game = True
+
+
     
    
     
