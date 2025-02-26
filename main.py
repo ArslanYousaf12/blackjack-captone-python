@@ -15,112 +15,9 @@
 ## cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
 ## The cards in the list have equal probability of being drawn.
 ## Cards are not removed from the deck as they are drawn.
-## The computer is the dealer.
-import random
-def sum_card(card_list):
-    sumNum = 0
-    sumNum = sum(card_list)
-    return sumNum
 
-def printingTotal(user_total_score, computer_total_score):
-    
-    print(f"your score is {user_total_score}")
-    print(f"computer score is {computer_total_score}")
+##################### Hints #####################
 
-def printCards(user_card, computer_card):
-    print(f"Your cards are {user_card}")
-    print(f"computer card is {computer_card}")
-
-def card_and_value_print(user_card, computer_card, user_total_score, computer_total_score):
-    printCards(user_card, computer_card)
-    printingTotal(user_total_score, computer_total_score)
-
-
-
-def random_card(input_card, card_list):
-    input_card.append(random.choice(cards))
-    return input_card
-
-def who_win(user_total, computer_total):
-     '''Take the user and computer score and then print who wins'''
-     if user_total > 21:
-        print("You loose")
-     elif computer_total > 21:
-        print("You win")
-     elif user_total > computer_total:
-        print(f"You win")
-     elif user_total == computer_total:
-        print("Draw")
-    
-     else:
-        print("You loose")
-
-cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
-end_of_game = False
-want_play = input("Do you want to play blackjack 'y' 'n' ")
-if want_play == "n":
-    end_of_game = True
-while not end_of_game:
-
-    ##################### Hints #####################
-    user_card = []
-    computer_card = []
-    total_value_computer = 0
-    total_value_user = 0
-    
-    user_card = random_card(user_card, cards)
-    user_card = random_card(user_card, cards)
-
-    computer_card = random_card(computer_card, cards)
-    printCards(user_card,computer_card)
-    user_choice = input("You want another card 'y' or not 'n' ")
-    if user_choice == 'n':
-        computer_card = random_card(computer_card, cards)
-        total_value_computer = sum_card(computer_card)
-        
-        # print(f"total value is {total_value}")
-        if total_value_computer < 17:
-            computer_card = random_card(computer_card, cards)
-            total_value_computer = sum_card(computer_card)
-        total_value_user = sum_card(user_card)
-        card_and_value_print(user_card, computer_card, total_value_user, total_value_computer)
-        who_win(user_total=total_value_user, computer_total= total_value_computer)
-        want_play = input("Do you want to play blackjack 'y' 'n' ")
-        if want_play == "n":
-            end_of_game = True
-    else:
-        user_card = random_card(user_card, cards)
-        total_value_user = sum_card(user_card)
-        total_value_computer = sum_card(computer_card)
-        if total_value_user < 19:
-            user_want_card = input(f"Do you want to another card 'n' or 'y' your score is {total_value_user}")
-            if user_want_card == 'n':
-                card_and_value_print(user_card, computer_card, total_value_user, total_value_computer)
-                who_win(user_total= total_value_user, computer_total= total_value_computer)
-                want_play = input("Do you want to play blackjack 'y' 'n' ")
-                if want_play == "n":
-                    end_of_game = True
-            else:
-                user_card = random_card(user_card, cards)
-                total_value_user = sum_card(user_card)
-                card_and_value_print(user_card, computer_card, total_value_user, total_value_computer)
-                who_win(user_total= total_value_user, computer_total= total_value_computer)
-                want_play = input("Do you want to play blackjack 'y' 'n' ")
-                if want_play == "n":
-                    end_of_game = True
-
-        else:
-            card_and_value_print(user_card, computer_card, total_value_user, total_value_computer)
-            who_win(user_total= total_value_user, computer_total= total_value_computer)
-            want_play = input("Do you want to play blackjack 'y' 'n' ")
-            if want_play == "n":
-                end_of_game = True
-
-
-    
-   
-    
-    
 #Hint 1: Go to this website and try out the Blackjack game: 
 #   https://games.washingtonpost.com/games/blackjack/
 #Then try out the completed Blackjack project here: 
@@ -135,29 +32,95 @@ while not end_of_game:
 
 #Hint 4: Create a deal_card() function that uses the List below to *return* a random card.
 #11 is the Ace.
-#cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+import random
+from replit import clear
+from art import logo
 
-#Hint 5: Deal the user and computer 2 cards each using deal_card() and append().
-#user_cards = []
-#computer_cards = []
+def deal_card():
+  """Returns a random card from the deck."""
+  cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+  card = random.choice(cards)
+  return card
 
 #Hint 6: Create a function called calculate_score() that takes a List of cards as input 
 #and returns the score. 
 #Look up the sum() function to help you do this.
+def calculate_score(cards):
+  """Take a list of cards and return the score calculated from the cards"""
 
-#Hint 7: Inside calculate_score() check for a blackjack (a hand with only 2 cards: ace + 10) and return 0 instead of the actual score. 0 will represent a blackjack in our game.
-
-#Hint 8: Inside calculate_score() check for an 11 (ace). If the score is already over 21, remove the 11 and replace it with a 1. You might need to look up append() and remove().
-
-#Hint 9: Call calculate_score(). If the computer or the user has a blackjack (0) or if the user's score is over 21, then the game ends.
-
-#Hint 10: If the game has not ended, ask the user if they want to draw another card. If yes, then use the deal_card() function to add another card to the user_cards List. If no, then the game has ended.
-
-#Hint 11: The score will need to be rechecked with every new card drawn and the checks in Hint 9 need to be repeated until the game ends.
-
-#Hint 12: Once the user is done, it's time to let the computer play. The computer should keep drawing cards as long as it has a score less than 17.
+  #Hint 7: Inside calculate_score() check for a blackjack (a hand with only 2 cards: ace + 10) and return 0 instead of the actual score. 0 will represent a blackjack in our game.
+  if sum(cards) == 21 and len(cards) == 2:
+    return 0
+  #Hint 8: Inside calculate_score() check for an 11 (ace). If the score is already over 21, remove the 11 and replace it with a 1. You might need to look up append() and remove().
+  if 11 in cards and sum(cards) > 21:
+    cards.remove(11)
+    cards.append(1)
+  return sum(cards)
 
 #Hint 13: Create a function called compare() and pass in the user_score and computer_score. If the computer and user both have the same score, then it's a draw. If the computer has a blackjack (0), then the user loses. If the user has a blackjack (0), then the user wins. If the user_score is over 21, then the user loses. If the computer_score is over 21, then the computer loses. If none of the above, then the player with the highest score wins.
+def compare(user_score, computer_score):
+  #Bug fix. If you and the computer are both over, you lose.
+  if user_score > 21 and computer_score > 21:
+    return "You went over. You lose 😤"
+
+
+  if user_score == computer_score:
+    return "Draw 🙃"
+  elif computer_score == 0:
+    return "Lose, opponent has Blackjack 😱"
+  elif user_score == 0:
+    return "Win with a Blackjack 😎"
+  elif user_score > 21:
+    return "You went over. You lose 😭"
+  elif computer_score > 21:
+    return "Opponent went over. You win 😁"
+  elif user_score > computer_score:
+    return "You win 😃"
+  else:
+    return "You lose 😤"
+
+def play_game():
+
+  print(logo)
+
+  #Hint 5: Deal the user and computer 2 cards each using deal_card()
+  user_cards = []
+  computer_cards = []
+  is_game_over = False
+
+  for _ in range(2):
+    user_cards.append(deal_card())
+    computer_cards.append(deal_card())
+
+  #Hint 11: The score will need to be rechecked with every new card drawn and the checks in Hint 9 need to be repeated until the game ends.
+
+  while not is_game_over:
+    #Hint 9: Call calculate_score(). If the computer or the user has a blackjack (0) or if the user's score is over 21, then the game ends.
+    user_score = calculate_score(user_cards)
+    computer_score = calculate_score(computer_cards)
+    print(f"   Your cards: {user_cards}, current score: {user_score}")
+    print(f"   Computer's first card: {computer_cards[0]}")
+
+    if user_score == 0 or computer_score == 0 or user_score > 21:
+      is_game_over = True
+    else:
+      #Hint 10: If the game has not ended, ask the user if they want to draw another card. If yes, then use the deal_card() function to add another card to the user_cards List. If no, then the game has ended.
+      user_should_deal = input("Type 'y' to get another card, type 'n' to pass: ")
+      if user_should_deal == "y":
+        user_cards.append(deal_card())
+      else:
+        is_game_over = True
+
+  #Hint 12: Once the user is done, it's time to let the computer play. The computer should keep drawing cards as long as it has a score less than 17.
+  while computer_score != 0 and computer_score < 17:
+    computer_cards.append(deal_card())
+    computer_score = calculate_score(computer_cards)
+
+  print(f"   Your final hand: {user_cards}, final score: {user_score}")
+  print(f"   Computer's final hand: {computer_cards}, final score: {computer_score}")
+  print(compare(user_score, computer_score))
 
 #Hint 14: Ask the user if they want to restart the game. If they answer yes, clear the console and start a new game of blackjack and show the logo from art.py.
-
+while input("Do you want to play a game of Blackjack? Type 'y' or 'n': ") == "y":
+  clear()
+  play_game()
